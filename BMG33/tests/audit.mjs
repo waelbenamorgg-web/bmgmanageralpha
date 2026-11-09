@@ -1,0 +1,15 @@
+import assert from 'node:assert/strict';
+import {auditProject} from '../src/audit.js';
+const base={months:['Jan','Fév'],clientBudget:100,clientSalesPlan:[50,50],overheadRate:15,imputationCodes:[{code:'MX',family:'Matériaux',qty:1,pu:100}],transfers:[],clientAmendments:[],subContractors:[],radNonST:{MX:[40,60]},prorataItems:[],expenses:[],priceRevision:{enabled:false}};
+const audit=(patch={})=>auditProject({...base,...patch});
+assert.equal(audit().filter(x=>x.severity==='error').length,0);
+assert(audit({transfers:[{fromCode:'MX',toCode:'BAD',amount:20}]}).some(x=>x.title.includes('code inexistant')));
+assert(audit({transfers:[{fromCode:'MX',toCode:'MX',amount:20}]}).some(x=>x.title.includes('codes identiques')));
+assert(audit({transfers:[{fromCode:'MX',toCode:'MX',amount:-20}]}).some(x=>x.title.includes('montant invalide')));
+assert(audit({clientSalesPlan:[20,20]}).some(x=>x.title.includes('Facturation de base')));
+assert(audit({radNonST:{BAD:[1,2]}}).some(x=>x.title.includes('code inconnu')));
+assert(audit({studyDisbursementBudget:90}).some(x=>x.title.includes('Budget études')));
+assert(audit({priceRevision:{enabled:true,baseIndexValue:100,fixedPart:0.2,variablePart:0.7,monthlyIndexes:[100,101]}}).some(x=>x.title.includes('Coefficients')));
+assert(audit({clientAmendments:[{id:1,number:'A1',amount:100,allocations:{MX:110},billingMonthly:[10,20]}]}).some(x=>x.title.includes('sur-affecté')));
+assert(audit({expenses:[{id:'E1',subCode:'BAD',period:'Jan',invoiceAmount:12}]}).some(x=>x.title.includes('code inconnu')));
+console.log('PASS: 9 scénarios de contrôle fonctionnel');

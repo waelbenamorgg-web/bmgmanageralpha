@@ -1,0 +1,29 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: dark; }
+html, body, #root { min-height: 100%; }
+body { margin: 0; font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; background: #0b1220; }
+
+/* BMG dark workspace: preserve semantic status colors while replacing the light shell. */
+.bmg-app { background: #0b1220 !important; color: #e2e8f0 !important; }
+.bmg-app header { background-color: rgba(15, 23, 42, .94) !important; border-color: #263449 !important; }
+.bmg-app .bg-white { background-color: #172337 !important; }
+.bmg-app .bg-slate-50, .bmg-app .bg-slate-100 { background-color: #111c2e !important; }
+.bmg-app .bg-slate-200 { background-color: #263449 !important; }
+.bmg-app .border-slate-200, .bmg-app .border-slate-100 { border-color: #334155 !important; }
+.bmg-app .text-slate-900, .bmg-app .text-slate-800 { color: #f1f5f9 !important; }
+.bmg-app .text-slate-700, .bmg-app .text-slate-600 { color: #cbd5e1 !important; }
+.bmg-app .text-slate-500, .bmg-app .text-slate-400 { color: #94a3b8 !important; }
+.bmg-app input, .bmg-app select, .bmg-app textarea { background-color: #0f1a2b !important; color: #e2e8f0 !important; border-color: #3a4a60 !important; }
+.bmg-app input::placeholder, .bmg-app textarea::placeholder { color: #64748b !important; }
+.bmg-app input:disabled, .bmg-app select:disabled, .bmg-app textarea:disabled { background-color: #1e293b !important; color: #94a3b8 !important; }
+.bmg-app .hover\:bg-slate-50:hover, .bmg-app .hover\:bg-slate-100:hover { background-color: #223149 !important; }
+.bmg-app .divide-slate-100 > :not([hidden]) ~ :not([hidden]) { border-color: #334155 !important; }
+.bmg-app .bg-indigo-50, .bmg-app .bg-indigo-50\/40 { background-color: rgba(79, 70, 229, .14) !important; }
+.bmg-app .bg-emerald-50 { background-color: rgba(16, 185, 129, .12) !important; }
+.bmg-app .bg-amber-50 { background-color: rgba(245, 158, 11, .12) !important; }
+.bmg-app .bg-rose-50 { background-color: rgba(244, 63, 94, .12) !important; }
+.bmg-app .ring-indigo-100 { --tw-ring-color: rgba(99, 102, 241, .25) !important; }
+.bmg-app ::selection { background: rgba(99, 102, 241, .35); }
